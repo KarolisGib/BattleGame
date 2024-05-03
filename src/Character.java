@@ -2,7 +2,9 @@ public class Character {
 
     String name;
 
-    int health;
+    double health;
 
     int damage;
+
+    double defence;
 }
