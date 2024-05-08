@@ -14,16 +14,18 @@ public class Methods {
         System.out.println();
     }
 
-    static void fight(Hero hero, Enemy enemy, ArrayList<Integer> heroChoice, ArrayList<Integer> enemyChoice) {
+    static void fight(Hero hero, Enemy enemy,
+                      ArrayList<Integer> heroAttackChoice, ArrayList<Integer> enemyAttackChoice,
+                      ArrayList<Double> heroDefenceChoice, ArrayList<Double> enemyDefenceChoice) {
         info(hero, enemy);
-        int heroDamage = heroChoice.get(random.nextInt(heroChoice.size()));
-        int enemyDamage = enemyChoice.get(random.nextInt(enemyChoice.size()));
+        int heroDamage = heroAttackChoice.get(random.nextInt(heroAttackChoice.size()));
+        int enemyDamage = enemyAttackChoice.get(random.nextInt(enemyAttackChoice.size()));
+        double heroDefence = heroDefenceChoice.get(random.nextInt(heroDefenceChoice.size()));
+        double enemyDefence = enemyDefenceChoice.get(random.nextInt(enemyDefenceChoice.size()));
         while (hero.health > 0 && enemy.health > 0) {
             counter++;
-            System.out.println(heroDamage);
-            System.out.println(enemyDamage);
-            double heroHealth = (hero.health -= (enemyDamage - (enemyDamage * hero.defence)));
-            double enemyHealth = (enemy.health -= (heroDamage - (heroDamage * enemy.defence)));
+            double heroHealth = (hero.health -= (enemyDamage - (enemyDamage * heroDefence)));
+            double enemyHealth = (enemy.health -= (heroDamage - (heroDamage * enemyDefence)));
             System.out.println(hero.name + " health is: " + df.format(heroHealth));
             System.out.println(enemy.name + " health is: " + df.format(enemyHealth));
             System.out.println();

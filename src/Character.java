@@ -6,5 +6,5 @@ public class Character {
 
     int damage;
 
-    double defence;
+    int defence;
 }
