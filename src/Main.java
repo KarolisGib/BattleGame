@@ -42,28 +42,17 @@ public class Main {
         enhancedShield.name = "Enhanced shield";
         enhancedShield.defence = 50;
 
-        ArrayList<Sword> heroAttackChoice = new ArrayList<>();
-        heroAttackChoice.add(rustySword);
-        heroAttackChoice.add(sword);
-        heroAttackChoice.add(enhancedSword);
+        ArrayList<Sword> attackChoice = new ArrayList<>();
+        attackChoice.add(rustySword);
+        attackChoice.add(sword);
+        attackChoice.add(enhancedSword);
 
-        ArrayList<Sword> enemyAttackChoice = new ArrayList<>();
-        enemyAttackChoice.add(rustySword);
-        enemyAttackChoice.add(sword);
-        enemyAttackChoice.add(enhancedSword);
-
-        ArrayList<Shield> heroDefenceChoice = new ArrayList<>();
-        heroDefenceChoice.add(rustyShield);
-        heroDefenceChoice.add(shield);
-        heroDefenceChoice.add(enhancedShield);
-
-        ArrayList<Shield> enemyDefenceChoice = new ArrayList<>();
-        enemyDefenceChoice.add(rustyShield);
-        enemyDefenceChoice.add(shield);
-        enemyDefenceChoice.add(enhancedShield);
+        ArrayList<Shield> defenceChoice = new ArrayList<>();
+        defenceChoice.add(rustyShield);
+        defenceChoice.add(shield);
+        defenceChoice.add(enhancedShield);
 
         Methods.fight(hero, enemy,
-                heroAttackChoice, enemyAttackChoice,
-                heroDefenceChoice, enemyDefenceChoice);
+                attackChoice, defenceChoice);
     }
 }

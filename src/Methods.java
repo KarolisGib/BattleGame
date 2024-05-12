@@ -19,25 +19,23 @@ public class Methods {
     }
 
     static void choices(Hero hero, Enemy enemy,
-                        ArrayList<Sword> heroAttackChoice, ArrayList<Sword> enemyAttackChoice,
-                        ArrayList<Shield> heroDefenceChoice, ArrayList<Shield> enemyDefenceChoice) {
-        int heroDamage = heroAttackChoice.get(random.nextInt(heroAttackChoice.size())).damage
+                        ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
+        int heroDamage = attackChoice.get(random.nextInt(attackChoice.size())).damage
                 + hero.damage;
-        int enemyDamage = enemyAttackChoice.get(random.nextInt(enemyAttackChoice.size())).damage
+        int enemyDamage = attackChoice.get(random.nextInt(attackChoice.size())).damage
                 + enemy.damage;
-        double heroDefence = ((heroDefenceChoice.get(random.nextInt(heroDefenceChoice.size())).defence
+        double heroDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
                 + hero.defence) / 100) / 2;
-        double enemyDefence = ((enemyDefenceChoice.get(random.nextInt(enemyDefenceChoice.size())).defence
+        double enemyDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
                 + enemy.defence) / 100) / 2;
         heroHit = (heroDamage - (heroDamage * enemyDefence));
         enemyHit = (enemyDamage - (enemyDamage * heroDefence));
     }
 
     static void fight(Hero hero, Enemy enemy,
-                      ArrayList<Sword> heroAttackChoice, ArrayList<Sword> enemyAttackChoice,
-                      ArrayList<Shield> heroDefenceChoice, ArrayList<Shield> enemyDefenceChoice) {
+                      ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
         info(hero, enemy);
-        choices(hero, enemy, heroAttackChoice, enemyAttackChoice, heroDefenceChoice, enemyDefenceChoice);
+        choices(hero, enemy, attackChoice, defenceChoice);
         while (hero.health > 0 && enemy.health > 0) {
             counter++;
             heroHealth = (hero.health -= enemyHit);
