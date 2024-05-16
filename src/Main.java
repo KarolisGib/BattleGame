@@ -60,5 +60,7 @@ public class Main {
         // baseXp - constant that decides how much xp you need to go up lvl
         //levelToGet - level you are aiming for. at 1 lvl this will be lvl 2
         //factor is another constant that decides how much of an increase of xp you need for each lvl
+
+        //(lastLevel + currentLevel) * 30
     }
 }
