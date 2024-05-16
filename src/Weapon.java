@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public class Weapon {
 
     String name;
 
-    int damage;
+    ArrayList<Integer> damage;
 }

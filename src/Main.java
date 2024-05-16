@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
@@ -20,15 +21,15 @@ public class Main {
 
         Sword rustySword = new Sword();
         rustySword.name = "Rusty sword";
-        rustySword.damage = (random.nextInt(2) + 8); // 8-9
+        rustySword.damage = new ArrayList<>(Arrays.asList(7, 8, 9)); // 8-9
 
         Sword sword = new Sword();
         sword.name = "Sword";
-        sword.damage = (random.nextInt(2) + 11); // 11-12
+        sword.damage = new ArrayList<>(Arrays.asList(11, 12, 13)); // 11-12
 
         Sword enhancedSword = new Sword();
         enhancedSword.name = "Enhanced sword";
-        enhancedSword.damage = (random.nextInt(2) + 14); // 14-15
+        enhancedSword.damage = new ArrayList<>(Arrays.asList(15, 16, 17)); // 14-15
 
         Shield rustyShield = new Shield();
         rustyShield.name = "Rusty shield";
@@ -54,5 +55,10 @@ public class Main {
 
         Methods.fight(hero, enemy,
                 attackChoice, defenceChoice);
+
+        //experience calculation baseXp * (levelToGet ^ factor)
+        // baseXp - constant that decides how much xp you need to go up lvl
+        //levelToGet - level you are aiming for. at 1 lvl this will be lvl 2
+        //factor is another constant that decides how much of an increase of xp you need for each lvl
     }
 }

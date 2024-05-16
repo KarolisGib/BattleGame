@@ -5,12 +5,19 @@ import java.util.Random;
 public class Methods {
 
     private static final DecimalFormat df = new DecimalFormat("0.0");
+
     static int counter = 0;
+
     static Random random = new Random();
-    static double heroHit;
-    static double enemyHit;
+
     static double heroHealth;
     static double enemyHealth;
+
+    static Sword heroWeapon;
+    static Sword enemyWeapon;
+
+    static double heroDefence;
+    static double enemyDefence;
 
     static void info(Hero hero, Enemy enemy) {
         System.out.println(hero.name + " health is: " + hero.health);
@@ -20,16 +27,14 @@ public class Methods {
 
     static void choices(Hero hero, Enemy enemy,
                         ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
-        int heroDamage = attackChoice.get(random.nextInt(attackChoice.size())).damage
-                + hero.damage;
-        int enemyDamage = attackChoice.get(random.nextInt(attackChoice.size())).damage
-                + enemy.damage;
-        double heroDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
+
+        heroWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
+        enemyWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
+
+        heroDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
                 + hero.defence) / 100) / 2;
-        double enemyDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
+        enemyDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).defence
                 + enemy.defence) / 100) / 2;
-        heroHit = (heroDamage - (heroDamage * enemyDefence));
-        enemyHit = (enemyDamage - (enemyDamage * heroDefence));
     }
 
     static void fight(Hero hero, Enemy enemy,
@@ -38,8 +43,18 @@ public class Methods {
         choices(hero, enemy, attackChoice, defenceChoice);
         while (hero.health > 0 && enemy.health > 0) {
             counter++;
+
+            int heroWeaponDamage = heroWeapon.damage.get(random.nextInt(3)) +
+                    hero.damage;
+            int enemyWeaponDamage = enemyWeapon.damage.get(random.nextInt(3)) +
+                    enemy.damage;
+
+            double heroHit = (heroWeaponDamage - (heroWeaponDamage * enemyDefence));
+            double enemyHit = (enemyWeaponDamage - (enemyWeaponDamage * heroDefence));
+
             heroHealth = (hero.health -= enemyHit);
             enemyHealth = (enemy.health -= heroHit);
+
             System.out.println(hero.name + " hit " + enemy.name + " with " + df.format(heroHit) +
                     " damage and left him with " + df.format(enemyHealth) + " health");
             System.out.println(enemy.name + " hit " + hero.name + " with " + df.format(enemyHit) +
