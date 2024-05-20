@@ -7,41 +7,16 @@ public class Main {
 
         Random random = new Random();
 
-        Hero hero = new Hero();
-        hero.name = "Hero";
-        hero.health = 100;
-        hero.damage = (random.nextInt(2) + 1);
-        hero.defence = (random.nextInt(51));
+        Hero hero = new Hero("Hero", 100, (random.nextInt(2) + 1), (random.nextInt(51)));
+        Enemy enemy = new Enemy("Enemy", 100, (random.nextInt(2) + 1), (random.nextInt(51)));
 
-        Enemy enemy = new Enemy();
-        enemy.name = "Enemy";
-        enemy.health = 100;
-        enemy.damage = (random.nextInt(2) + 1);
-        enemy.defence = (random.nextInt(51));
+        Sword rustySword = new Sword("Rusty sword", new ArrayList<>(Arrays.asList(7, 8, 9)));
+        Sword sword = new Sword("Sword", new ArrayList<>(Arrays.asList(11, 12, 13)));
+        Sword enhancedSword = new Sword("Enhanced sword", new ArrayList<>(Arrays.asList(15, 16, 17)));
 
-        Sword rustySword = new Sword();
-        rustySword.name = "Rusty sword";
-        rustySword.damage = new ArrayList<>(Arrays.asList(7, 8, 9)); // 8-9
-
-        Sword sword = new Sword();
-        sword.name = "Sword";
-        sword.damage = new ArrayList<>(Arrays.asList(11, 12, 13)); // 11-12
-
-        Sword enhancedSword = new Sword();
-        enhancedSword.name = "Enhanced sword";
-        enhancedSword.damage = new ArrayList<>(Arrays.asList(15, 16, 17)); // 14-15
-
-        Shield rustyShield = new Shield();
-        rustyShield.name = "Rusty shield";
-        rustyShield.defence = 40;
-
-        Shield shield = new Shield();
-        shield.name = "Shield";
-        shield.defence = 45;
-
-        Shield enhancedShield = new Shield();
-        enhancedShield.name = "Enhanced shield";
-        enhancedShield.defence = 50;
+        Shield rustyShield = new Shield("Rusty shield", 40);
+        Shield shield = new Shield("Shield", 45);
+        Shield enhancedShield = new Shield("Enhanced shield", 50);
 
         ArrayList<Sword> attackChoice = new ArrayList<>();
         attackChoice.add(rustySword);
