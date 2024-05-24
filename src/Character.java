@@ -8,6 +8,10 @@ public class Character {
 
     private int defence;
 
+    private int experience;
+
+    private int level;
+
     public String getName() {
         return name;
     }
@@ -40,10 +44,28 @@ public class Character {
         this.defence = defence;
     }
 
-    public Character(String name, double health, int damage, int defence) {
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    public Character(String name, double health, int damage, int defence, int experience, int level) {
         this.name = name;
         this.health = health;
         this.damage = damage;
         this.defence = defence;
+        this.experience = experience;
+        this.level = level;
     }
 }

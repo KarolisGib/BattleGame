@@ -7,8 +7,8 @@ public class Main {
 
         Random random = new Random();
 
-        Hero hero = new Hero("Hero", 100, (random.nextInt(2) + 1), (random.nextInt(51)));
-        Enemy enemy = new Enemy("Enemy", 100, (random.nextInt(2) + 1), (random.nextInt(51)));
+        Hero hero = new Hero("Hero", 100, (random.nextInt(2) + 1), (random.nextInt(51)), 0, 1);
+        Enemy enemy = new Enemy("Enemy", 100, (random.nextInt(2) + 1), (random.nextInt(51)), 10, 1);
 
         Sword rustySword = new Sword("Rusty sword", new ArrayList<>(Arrays.asList(7, 8, 9)));
         Sword sword = new Sword("Sword", new ArrayList<>(Arrays.asList(11, 12, 13)));

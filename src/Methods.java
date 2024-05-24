@@ -10,6 +10,8 @@ public class Methods {
 
     static Random random = new Random();
 
+    static int heroHand;
+
     static double heroHealth;
     static double enemyHealth;
 
@@ -28,8 +30,20 @@ public class Methods {
     static void choices(Hero hero, Enemy enemy,
                         ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
 
-        heroWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
-        enemyWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
+        switch (hero.getLevel()) {
+            case 3:
+                heroWeapon = attackChoice.get(2);
+                enemyWeapon = attackChoice.get(2);
+            case 2:
+                heroWeapon = attackChoice.get(1);
+                enemyWeapon = attackChoice.get(1);
+            case 1:
+                heroWeapon = attackChoice.getFirst();
+                enemyWeapon = attackChoice.getFirst();
+        }
+
+//        heroWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
+//        enemyWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
 
         heroDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).getDefence()
                 + hero.getDefence()) / 100) / 2;
@@ -40,8 +54,8 @@ public class Methods {
     static void fight(Hero hero, Enemy enemy,
                       ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
         info(hero, enemy);
-        choices(hero, enemy, attackChoice, defenceChoice);
         while (hero.getHealth() > 0 && enemy.getHealth() > 0) {
+            choices(hero, enemy, attackChoice, defenceChoice);
             counter++;
 
             int heroWeaponDamage = heroWeapon.getDamage().get(random.nextInt(3)) +
