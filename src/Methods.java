@@ -10,7 +10,7 @@ public class Methods {
 
     static Random random = new Random();
 
-    static int heroHand;
+    static Enemy enemyChoice;
 
     static double heroHealth;
     static double enemyHealth;
@@ -21,70 +21,85 @@ public class Methods {
     static double heroDefence;
     static double enemyDefence;
 
-    static void info(Hero hero, Enemy enemy) {
-        System.out.println(hero.getName() + " health is: " + hero.getHealth());
-        System.out.println(enemy.getName() + " health is: " + enemy.getHealth());
-        System.out.println();
-    }
 
-    static void choices(Hero hero, Enemy enemy,
+    static void choices(Hero hero, ArrayList<Enemy> enemyList,
                         ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
 
         switch (hero.getLevel()) {
             case 3:
-                heroWeapon = attackChoice.get(2);
-                enemyWeapon = attackChoice.get(2);
+                enemyChoice = enemyList.get(hero.getLevel() - 1);
+                heroWeapon = attackChoice.get(hero.getLevel() - 1);
+                enemyWeapon = attackChoice.get(hero.getLevel() - 1);
             case 2:
-                heroWeapon = attackChoice.get(1);
-                enemyWeapon = attackChoice.get(1);
+                enemyChoice = enemyList.get(hero.getLevel() - 1);
+                heroWeapon = attackChoice.get(hero.getLevel() - 1);
+                enemyWeapon = attackChoice.get(hero.getLevel() - 1);
             case 1:
-                heroWeapon = attackChoice.getFirst();
-                enemyWeapon = attackChoice.getFirst();
+                enemyChoice = enemyList.get(hero.getLevel() - 1);
+                heroWeapon = attackChoice.get(hero.getLevel() - 1);
+                enemyWeapon = attackChoice.get(hero.getLevel() - 1);
         }
-
-//        heroWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
-//        enemyWeapon = attackChoice.get(random.nextInt(attackChoice.size()));
 
         heroDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).getDefence()
                 + hero.getDefence()) / 100) / 2;
         enemyDefence = ((defenceChoice.get(random.nextInt(defenceChoice.size())).getDefence()
-                + enemy.getDefence()) / 100) / 2;
+                + enemyChoice.getDefence()) / 100) / 2;
     }
 
-    static void fight(Hero hero, Enemy enemy,
+    static void fight(Hero hero, ArrayList<Enemy> enemyList,
                       ArrayList<Sword> attackChoice, ArrayList<Shield> defenceChoice) {
-        info(hero, enemy);
-        while (hero.getHealth() > 0 && enemy.getHealth() > 0) {
-            choices(hero, enemy, attackChoice, defenceChoice);
+        choices(hero, enemyList, attackChoice, defenceChoice);
+        while (hero.getHealth() > 0 && enemyChoice.getHealth() > 0) {
             counter++;
 
             int heroWeaponDamage = heroWeapon.getDamage().get(random.nextInt(3)) +
                     hero.getDamage();
             int enemyWeaponDamage = enemyWeapon.getDamage().get(random.nextInt(3)) +
-                    enemy.getDamage();
+                    enemyChoice.getDamage();
 
             double heroHit = (heroWeaponDamage - (heroWeaponDamage * enemyDefence));
             double enemyHit = (enemyWeaponDamage - (enemyWeaponDamage * heroDefence));
 
             heroHealth = (hero.health -= enemyHit);
-            enemyHealth = (enemy.health -= heroHit);
+            enemyHealth = (enemyChoice.health -= heroHit);
 
-            System.out.println(hero.getName() + " hit " + enemy.getName() + " with " + df.format(heroHit) +
+            System.out.println(hero.getName() + " hit " + enemyChoice.getName() + " with " + df.format(heroHit) +
                     " damage and left him with " + df.format(enemyHealth) + " health");
-            System.out.println(enemy.getName() + " hit " + hero.getName() + " with " + df.format(enemyHit) +
+            System.out.println(enemyChoice.getName() + " hit " + hero.getName() + " with " + df.format(enemyHit) +
                     " damage and left him with " + df.format(heroHealth) + " health");
             System.out.println();
         }
-        result(hero, enemy);
+        result(hero);
     }
 
-    static void result(Hero hero, Enemy enemy) {
-        if (heroHealth == enemyHealth) {
+    static void heroLevelCalculation(Hero hero) {
+        int currentHeroExp = ;
+        int base = 30;
+        int nextLevel = hero.getLevel() + 1;
+        int levelUpExp = (hero.getLevel() + nextLevel) * base;
+
+        if (currentHeroExp >= levelUpExp) {
+            hero.setLevel(+1);
+            currentHeroExp = 0;
+        }
+        System.out.println();
+        System.out.println("Required exp to the next level: " + levelUpExp);
+        System.out.println("Current " + hero.getName() + " exp is: " + currentHeroExp);
+        System.out.println("Current " + hero.getName() + " level is: " + hero.getLevel());
+        System.out.println();
+    }
+
+    static void result(Hero hero) {
+        if (heroHealth == enemyChoice.getHealth()) {
             System.out.println("Battle took " + counter + " rounds and ended up in tie");
-        } else if (heroHealth > enemyHealth) {
+        } else if (heroHealth > enemyChoice.getHealth()) {
             System.out.println("Battle took " + counter + " rounds and " + hero.getName() + " won");
+            heroLevelCalculation(hero);
+            hero.setHealth(100);
+            enemyChoice.setHealth(85);
+            counter = 0;
         } else {
-            System.out.println("Battle took " + counter + " rounds and " + enemy.getName() + " won");
+            System.out.println("Battle took " + counter + " rounds and " + enemyChoice.getName() + " won");
         }
     }
 }

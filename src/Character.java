@@ -56,8 +56,9 @@ public class Character {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public int setExperience(int experience) {
         this.experience = experience;
+        return experience;
     }
 
     public Character(String name, double health, int damage, int defence, int experience, int level) {
