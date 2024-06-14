@@ -1,7 +1,19 @@
+package lt.karolis.BattleGame;
+
+import lt.karolis.BattleGame.Char.Heroes.Enemy;
+import lt.karolis.BattleGame.Char.Heroes.Hero;
+import lt.karolis.BattleGame.Shield.Shield;
+import lt.karolis.BattleGame.Weapon.Sword.Sword;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.util.*;
 
-public class Main {
+@SpringBootApplication
+public class BattleGame {
+
     public static void main(String[] args) {
+        SpringApplication.run(BattleGame.class, args);
 
         Random random = new Random();
         Scanner sc = new Scanner(System.in);
@@ -52,7 +64,7 @@ public class Main {
             }
         }
 
-//        Methods.choices(hero, enemyList, attackChoice, defenceChoice);
+//      Methods.choices(hero, enemyList, attackChoice, defenceChoice);
 
         //experience calculation baseXp * (levelToGet ^ factor)
         // baseXp - constant that decides how much xp you need to go up lvl

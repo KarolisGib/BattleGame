@@ -1,3 +1,10 @@
+package lt.karolis.BattleGame;
+
+import lt.karolis.BattleGame.Char.Heroes.Enemy;
+import lt.karolis.BattleGame.Char.Heroes.Hero;
+import lt.karolis.BattleGame.Shield.Shield;
+import lt.karolis.BattleGame.Weapon.Sword.Sword;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
