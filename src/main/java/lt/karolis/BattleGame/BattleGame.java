@@ -1,9 +1,10 @@
 package lt.karolis.BattleGame;
 
-import lt.karolis.BattleGame.Char.Heroes.Enemy;
-import lt.karolis.BattleGame.Char.Heroes.Hero;
-import lt.karolis.BattleGame.Shield.Shield;
-import lt.karolis.BattleGame.Weapon.Sword.Sword;
+import lt.karolis.BattleGame.chars.heroes.Enemy;
+import lt.karolis.BattleGame.chars.heroes.Hero;
+import lt.karolis.BattleGame.methods.Methods;
+import lt.karolis.BattleGame.shield.Shield;
+import lt.karolis.BattleGame.weapon.Sword.Sword;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,56 +16,43 @@ public class BattleGame {
     public static void main(String[] args) {
         SpringApplication.run(BattleGame.class, args);
 
-        Random random = new Random();
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        Hero hero = new Hero("Hero", 100, (random.nextInt(2) + 1),
-                (15), 0, 1);
+        Hero hero = new Hero(1, "Hero", 100, 3, 15, 0, 1);
 
-        Enemy weakEnemy = new Enemy("Weak enemy", 85, (random.nextInt(2) + 1),
-                (6), 10, 1);
-        Enemy enemy = new Enemy("Enemy", 90, (random.nextInt(2) + 1),
-                (8), 20, 2);
-        Enemy strongEnemy = new Enemy("Strong enemy", 95, (random.nextInt(2) + 1),
-                (10), 30, 3);
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(new Enemy(2, "Weak enemy", 90, 3, 6, 10, 1));
+        enemies.add(new Enemy(3, "Enemy", 95, 3, 8, 20, 2));
+        enemies.add(new Enemy(4, "Strong enemy", 100, 3, 10, 30, 3));
 
-        Sword rustySword = new Sword("Rusty sword", new ArrayList<>(Arrays.asList(7, 8, 9)));
-        Sword sword = new Sword("Sword", new ArrayList<>(Arrays.asList(11, 12, 13)));
-        Sword enhancedSword = new Sword("Enhanced sword", new ArrayList<>(Arrays.asList(15, 16, 17)));
+        ArrayList<Sword> swords = new ArrayList<>();
+        swords.add(new Sword(1, "Rusty sword", 9));
+        swords.add(new Sword(2, "Sword", 13));
+        swords.add(new Sword(3, "Enhanced sword", 17));
 
-        Shield rustyShield = new Shield("Rusty shield", 40);
-        Shield shield = new Shield("Shield", 45);
-        Shield enhancedShield = new Shield("Enhanced shield", 50);
-
-        ArrayList<Enemy> enemyList = new ArrayList<>();
-        enemyList.add(weakEnemy);
-        enemyList.add(enemy);
-        enemyList.add(strongEnemy);
-
-        ArrayList<Sword> attackChoice = new ArrayList<>();
-        attackChoice.add(rustySword);
-        attackChoice.add(sword);
-        attackChoice.add(enhancedSword);
-
-        ArrayList<Shield> defenceChoice = new ArrayList<>();
-        defenceChoice.add(rustyShield);
-        defenceChoice.add(shield);
-        defenceChoice.add(enhancedShield);
+        ArrayList<Shield> shields = new ArrayList<>();
+        shields.add(new Shield(1, "Rusty shield", 40));
+        shields.add(new Shield(2, "Shield", 45));
+        shields.add(new Shield(3, "Enhanced shield", 50));
 
         while (true) {
             info();
-            int options = sc.nextInt();
-            switch (options) {
-                case 1:
-                    Methods.fight(hero, enemyList, attackChoice, defenceChoice);
-                    break;
-                case 2:
-                    System.exit(0);
-                    break;
+
+            try {
+                switch (scanner.nextInt()) {
+                    case 1:
+                        Methods.fight(hero, enemies, swords, shields, scanner);
+                        break;
+                    case 2:
+                        System.exit(0);
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a number");
+                System.out.println();
+                scanner.nextLine();
             }
         }
-
-//      Methods.choices(hero, enemyList, attackChoice, defenceChoice);
 
         //experience calculation baseXp * (levelToGet ^ factor)
         // baseXp - constant that decides how much xp you need to go up lvl

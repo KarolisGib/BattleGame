@@ -1,4 +1,4 @@
-package lt.karolis.BattleGame;
+package lt.karolis.BattleGame.saveGame;
 
 import java.io.File;
 import java.io.IOException;
